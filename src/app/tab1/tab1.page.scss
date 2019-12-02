@@ -2,3 +2,13 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+// .ion-content {
+//   background-color: aqua;
+// }
+
+.swiper-pagination-bullet {
+  --bullet-background: #000000 !important;
+  width: 12px;
+  height: 12px;
+}
