@@ -26,7 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-.ion-app {
+.ion-content,
+.ion-header,
+.ion-footer {
     font-family: 'Montserrat';
 }
 
