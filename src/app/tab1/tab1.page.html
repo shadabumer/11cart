@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-icon name="menu" size="large"></ion-icon>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title slot="secondary">11Cart</ion-title>
+    <ion-title slot="secondary" class="ion-margin-end">11Cart</ion-title>
     <ion-buttons slot="end">
       <ion-icon name="cart" size="large"></ion-icon>
     </ion-buttons>
@@ -34,11 +34,11 @@
     <ion-card-content>
       <ion-grid>
         <ion-row *ngFor="let item of [1, 2, 3]">
-          <ion-col size="6" align-self-center>
+          <ion-col size="6" >
             <img src="/assets/images/category-home/bakery-diary.jpg" height="150" alt="" />
             <p class="ion-text-center">Lorem ipsum dolor</p>
           </ion-col>
-          <ion-col size="6" align-self-center>
+          <ion-col size="6" class="ion-align-self-center">
             <img src="/assets/images/category-home/cleaning.jpeg" height="150" alt="" />
             <p class="ion-text-center">Lorem ipsum dolor</p>
 
