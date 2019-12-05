@@ -1,9 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Registration</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form>
+    <ion-list lines="full" class="ion-no-margin ion-padding">
+        <ion-item>
+          <ion-label position="stacked">First Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Last Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text"></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Confirm Password <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Sign Up</ion-button>
+    </div>
+    <p class="ion-padding ion-text-center">Already Registered? <ion-text><a routerLink="/login">Sign In Here</a></ion-text></p>
+  </form>
 </ion-content>
