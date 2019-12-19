@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { MenuController } from '@ionic/angular';
+import { Tab2Page } from '../tab2/tab2.page';
 
 @NgModule({
   imports: [

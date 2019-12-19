@@ -33,19 +33,22 @@
 
     <ion-card-content>
       <ion-grid>
-        <ion-row *ngFor="let item of [1, 2, 3]">
-          <ion-col size="6" >
-            <img src="/assets/images/category-home/bakery-diary.jpg" height="150" alt="" />
-            <p class="ion-text-center">Lorem ipsum dolor</p>
-          </ion-col>
-          <ion-col size="6" class="ion-align-self-center">
-            <img src="/assets/images/category-home/cleaning.jpeg" height="150" alt="" />
-            <p class="ion-text-center">Lorem ipsum dolor</p>
-
-          </ion-col>
+        <ion-row>
+            <ion-col size="6" *ngFor="let category of categories; let i = index">
+              <ng-container *ngIf="i < 6; else categoryButton">
+                <img [src]="category.imageUrl" height="150" alt="" />
+                <p class="ion-text-center ion-padding">{{ category.name }}</p>
+              </ng-container>
+            </ion-col>
+            <!-- <ion-col size="6" *ngIf="i < 6; else categoryButton">
+              <img [src]="category.imageUrl" height="150" alt="" />
+              <p class="ion-text-center ion-padding">{{ category.name }}</p>
+            </ion-col> -->
         </ion-row>
       </ion-grid>
-      <ion-button color="primary" expand="block" shape="round" fill="outline">View More</ion-button>
+      <ng-template #categoryButton>
+        <ion-button [routerLink]="['/tabs/tab2']" color="primary" expand="block" shape="round" fill="outline">View More</ion-button>
+      </ng-template>
     </ion-card-content>
   </ion-card>
 
@@ -57,17 +60,17 @@
       <ion-list-header color="primary">
         <h2 class="ion-text-center">Browse Products</h2>
       </ion-list-header>
-      <ion-item class="ion-no-padding" color="light" *ngFor="let item of [1, 2, 3, 4]">
+      <ion-item class="ion-no-padding" color="light" *ngFor="let item of items">
         <ion-grid>
           <ion-row>
             <ion-col size="4" class="ion-margin-top">
-              <img src="/assets/images/category-home/bakery-diary.jpg" height="160" alt="" />
+              <img [src]="item.imageUrl" height="160" alt="" />
             </ion-col>
             <ion-col size="8" class="ion-padding-start">
-              <h4>Product Name</h4>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-              <small>500gm</small>
-              <h5>Rs. 200</h5>
+              <h4>{{ item.name }}</h4>
+              <p>{{ item.description }}</p>
+              <!-- <small>500gm</small> -->
+              <h5>{{ item.price | currency:'INR' }}</h5>
             </ion-col>
           </ion-row>
         </ion-grid>
