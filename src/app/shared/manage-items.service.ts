@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
-import { Item } from '../models/Item.Model';
+import { Item } from '../models/item.model';
 
 
 @Injectable({
@@ -42,6 +42,6 @@ export class ManageItemsService {
   }
 
   getItemsByCategory(categoryId: string) {
-    
+    return this.db.collection('items', ref => ref.where('categoryId', '==', categoryId)).valueChanges({ idField: 'id' });
   }
 }

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      {{ 'Items List' }}
+    </ion-title>
+  </ion-toolbar>
+  <ion-searchbar></ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-virtual-scroll [items]="itemList" approxItemHeight="320px">
+    <ion-list *virtualItem="let item; let itemBounds = bounds;">
+    <ion-item class="ion-no-padding" color="light" (click)="onItemSelected(item)">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-margin-top">
+              <ion-img [src]="item.imageUrl" height="160" alt=""></ion-img>
+          </ion-col>
+          <ion-col size="8" class="ion-padding-start">
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.description }}</p>
+            <!-- <small>500gm</small> -->
+            <h5>{{ item.price | currency:'INR' }}</h5>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+  </ion-virtual-scroll>
+
+
+  <div *ngIf="!itemList">
+    <ion-list *ngFor="let item of [1, 2, 3, 4, 5, 6]">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <ion-text *ngIf="itemListLength == 0" class="ion-text-center ion-padding">{{ 'Stock is empty' }}</ion-text>
+
+
+</ion-content>

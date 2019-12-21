@@ -36,7 +36,7 @@
         <ion-row>
             <ion-col size="6" *ngFor="let category of categories; let i = index">
               <ng-container *ngIf="i < 6; else categoryButton">
-                <img [src]="category.imageUrl" height="150" alt="" />
+                <ion-img [src]="category.imageUrl" height="150" alt=""></ion-img>
                 <p class="ion-text-center ion-padding">{{ category.name }}</p>
               </ng-container>
             </ion-col>
@@ -64,7 +64,7 @@
         <ion-grid>
           <ion-row>
             <ion-col size="4" class="ion-margin-top">
-              <img [src]="item.imageUrl" height="160" alt="" />
+                <ion-img [src]="item.imageUrl" height="160" alt=""></ion-img>
             </ion-col>
             <ion-col size="8" class="ion-padding-start">
               <h4>{{ item.name }}</h4>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Category } from '../models/Category.Model';
 import { map } from 'rxjs/operators';
+import { Category } from '../models/category.model';
 
 
 @Injectable({

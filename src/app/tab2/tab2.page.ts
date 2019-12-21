@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../models/Category.Model';
 import { CategoryService } from '../shared/category.service';
+import { Category } from '../models/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -12,14 +13,19 @@ export class Tab2Page implements OnInit {
   categories: Category[];
 
   
-  constructor(public categoryService: CategoryService) {}
+  constructor(public categoryService: CategoryService,
+              public router: Router) {}
 
   ngOnInit(): void {
     this.categoryService.getCategories()
       .subscribe((categoryList: any) => {
         this.categories = categoryList;
-        console.log(this.categories);
+        // console.log(this.categories);
       })
+  }
+
+  onSelectItem(categoryId: string) {
+    this.router.navigate(['item-list'], { queryParams: { categoryId } })
   }
 
 }
