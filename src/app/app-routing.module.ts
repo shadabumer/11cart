@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
   },
   {
     path: 'login',
@@ -16,10 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'item-list',
-    loadChildren: () => import('./pages/items/item-list/item-list.module').then( m => m.ItemListPageModule)
-  },  {
+    loadChildren: () => import('./pages/items/item-list/item-list.module').then( m => m.ItemListPageModule),
+    canActivate: [AngularFireAuthGuard]
+  },
+  {
     path: 'item-details',
-    loadChildren: () => import('./pages/items/item-details/item-details.module').then( m => m.ItemDetailsPageModule)
+    loadChildren: () => import('./pages/items/item-details/item-details.module').then( m => m.ItemDetailsPageModule),
+    canActivate:[AngularFireAuthGuard]
   }
 
 
