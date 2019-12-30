@@ -12,11 +12,13 @@ import { UsersService } from './shared/users.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  isAuthenticated: boolean = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private authenticationService: UsersService,
+    public authenticationService: UsersService,
     private router: Router
   ) {
     this.initializeApp();
@@ -27,13 +29,20 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      // this.authenticationService.authenticationState.subscribe(state => {
-      //   if (state) {
-      //     this.router.navigate(['register']);
-      //   } else {
-      //     this.router.navigate(['login']);
-      //   }
-      // });
+      this.authenticationService.authenticationState.subscribe(state => {
+        if (state) {
+          this.router.navigate(['tabs', 'tab1']);
+          this.isAuthenticated = true;
+        } else {
+          this.router.navigate(['login']);
+          this.isAuthenticated = false;
+        }
+      });
     });
+  }
+
+  logout() {
+    const response = this.authenticationService.logout();
+    console.log('logged out:', response);
   }
 }

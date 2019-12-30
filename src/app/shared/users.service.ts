@@ -8,13 +8,14 @@ import { BehaviorSubject } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
+const TOKEN_KEY = 'auth-token';
+ 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UsersService {
 
-  TOKEN_KEY: string = 'auth-token';
   authenticationState = new BehaviorSubject(false);
 
   constructor(public afAuth: AngularFireAuth,
@@ -39,7 +40,9 @@ export class UsersService {
   // Sign in with email/password
   async login(email, password) {
     const user = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-    this.storage.set(this.TOKEN_KEY, 'Bearer 1234567').then(() => {
+    
+    const userToken = user.user.refreshToken;
+    this.storage.set(TOKEN_KEY, userToken).then(() => {
       this.authenticationState.next(true);
     });
     return user;
@@ -47,7 +50,7 @@ export class UsersService {
 
   async logout() {
     await this.afAuth.auth.signOut;
-    return this.storage.remove(this.TOKEN_KEY).then(() => {
+    return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
     });
   }
@@ -57,7 +60,7 @@ export class UsersService {
    }
 
    checkToken() {
-    this.storage.get(this.TOKEN_KEY).then(res => {
+    this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
         this.authenticationState.next(true);
       }
