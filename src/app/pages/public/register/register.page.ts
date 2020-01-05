@@ -49,6 +49,7 @@ export class RegisterPage implements OnInit {
 
   onRegisterUser() {
     let newUser: User = {
+      id: this.users.userDetails().uid,
       firstName: this.f.firstName.value,
       lastName: this.f.lastName.value,
       email: this.f.email.value,

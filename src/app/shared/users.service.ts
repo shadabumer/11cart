@@ -34,7 +34,11 @@ export class UsersService {
 
 
   registerUser(user: User) {
-    return this.db.collection('users').add({...user});
+    return this.db.collection('users').doc(user.id).set({...user});
+  }
+
+  getUser(id: string) {
+    return this.db.collection('users').doc(id).get();
   }
   
   // Sign in with email/password
@@ -62,6 +66,7 @@ export class UsersService {
    checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
+        console.log('check token res:', res);
         this.authenticationState.next(true);
       }
     })
