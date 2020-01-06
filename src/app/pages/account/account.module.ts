@@ -8,6 +8,7 @@ import { AccountPageRoutingModule } from './account-routing.module';
 
 import { AccountPage } from './account.page';
 import { OrdersComponent } from './orders/orders.component';
+import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { OrdersComponent } from './orders/orders.component';
     AccountPageRoutingModule,
     
   ],
-  declarations: [AccountPage, OrdersComponent]
+  declarations: [AccountPage, OrdersComponent, ProfileDetailsComponent]
 })
 export class AccountPageModule {}
