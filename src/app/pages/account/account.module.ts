@@ -9,6 +9,7 @@ import { AccountPageRoutingModule } from './account-routing.module';
 import { AccountPage } from './account.page';
 import { OrdersComponent } from './orders/orders.component';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
+import { AddressPageModule } from './address/address.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
     FormsModule,
     IonicModule,
     AccountPageRoutingModule,
+    AddressPageModule
     
   ],
   declarations: [AccountPage, OrdersComponent, ProfileDetailsComponent]
