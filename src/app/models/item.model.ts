@@ -6,6 +6,7 @@ export interface Item {
     category: string,
     price: number,
     description: string,
+    amount: number,
     status?: boolean
   }
   

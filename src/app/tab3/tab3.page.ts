@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 import { Product, CartService } from '../services/cart.service';
+import { Item } from '../models/item.model';
 
 @Component({
   selector: 'app-tab3',
@@ -9,7 +10,8 @@ import { Product, CartService } from '../services/cart.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-  cart: Product[] = [];
+  // cart: Product[] = [];
+  cart: Item[] = [];
 
   constructor(private cartService: CartService, private alertCtrl: AlertController) { }
 
@@ -17,15 +19,15 @@ export class Tab3Page implements OnInit {
     this.cart = this.cartService.getcart();
   }
 
-  decreaseCartItem(product) {
+  decreaseCartItem(product: Item) {
     this.cartService.decreaseProduct(product);
   }
  
-  increaseCartItem(product) {
+  increaseCartItem(product: Item) {
     this.cartService.addProduct(product);
   }
  
-  removeCartItem(product) {
+  removeCartItem(product: Item) {
     this.cartService.removeProduct(product);
   }
 
@@ -38,7 +40,7 @@ export class Tab3Page implements OnInit {
  
     let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
-      message: 'We will deliver your food as soon as possible',
+      message: 'We will deliver your items as soon as possible',
       buttons: ['OK']
     });
     alert.present();

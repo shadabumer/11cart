@@ -5,6 +5,8 @@ import { CategoryService } from '../shared/category.service';
 import { ManageItemsService } from '../shared/manage-items.service';
 import { Category } from '../models/category.model';
 import { Item } from '../models/item.model';
+import { CartService } from '../services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -24,7 +26,9 @@ export class Tab1Page implements OnInit {
   isItemsLoaded: boolean = false;
   
   constructor(public categoryService: CategoryService,
-              public itemService: ManageItemsService) {}
+              public itemService: ManageItemsService,
+              public cartService: CartService,
+              private router: Router) {}
 
   ngOnInit() {
     this.categoryService.getCategories()
@@ -44,6 +48,18 @@ export class Tab1Page implements OnInit {
         console.log('items by category:', items);
       })
   }
-//"MMjQND8mlW0shkW7twLD"
+
+  onItemSelected(item: Item) {
+    this.router.navigate(['item-details'], { queryParams: item });
+  }
+
+  onSelectCategory(categoryId: string) {
+    this.router.navigate(['item-list'], { queryParams: { categoryId } })
+  }
+
+  addToCart(e, item: Item) {
+    e.stopPropagation();
+    this.cartService.addProduct(item);
+  }
 
 }

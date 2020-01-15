@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
 import { ManageItemsService } from 'src/app/shared/manage-items.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-item-list',
@@ -14,6 +15,7 @@ export class ItemListPage implements OnInit {
   categoryId: string;
 
   constructor(public itemService: ManageItemsService, 
+    public cartService: CartService,
     public route: ActivatedRoute,
     public router: Router) { }
 
@@ -34,6 +36,11 @@ export class ItemListPage implements OnInit {
 
   onItemSelected(item: Item) {
     this.router.navigate(['item-details'], { queryParams: item });
+  }
+
+  addToCart(e, item: Item) {
+    e.stopPropagation();
+    this.cartService.addProduct(item);
   }
 
 }

@@ -33,34 +33,34 @@
 
     <ion-card-content>
       <ion-grid>
-        <ion-row>
-            <ion-col size="6" *ngFor="let category of categories; let i = index">
+        <ion-row  class="ion-justify-content-center">
+            <ion-col size="6" *ngFor="let category of categories; let i = index" (click)="onSelectCategory(category.id)">
               <ng-container *ngIf="i < 6; else categoryButton">
                 <ion-img [src]="category.imageUrl" height="150" width="150" [alt]="category.name"></ion-img>
                 <p class="ion-text-center ion-padding">{{ category.name }}</p>
               </ng-container>
             </ion-col>
-            <!-- <ion-col size="6" *ngIf="i < 6; else categoryButton">
-              <img [src]="category.imageUrl" height="150" alt="" />
-              <p class="ion-text-center ion-padding">{{ category.name }}</p>
-            </ion-col> -->
-        </ion-row>
+          </ion-row>
+          <ng-template #categoryButton>
+            <!-- <ion-row>
+              <ion-col size="12" offest="3"> -->
+                <ion-button [routerLink]="['/tabs/tab2']" 
+                expand="block" 
+                shape="round" 
+                fill="outline">View More</ion-button>
+              <!-- </ion-col>
+            </ion-row> -->
+          </ng-template>
       </ion-grid>
-      <ng-template #categoryButton>
-        <ion-button [routerLink]="['/tabs/tab2']" color="primary" expand="block" shape="round" fill="outline">View More</ion-button>
-      </ng-template>
     </ion-card-content>
   </ion-card>
 
   <!-- product list starts here -->
-    <!-- <ion-label class="ion-text-center">
-      <h2>Browse Products</h2>
-    </ion-label> -->
     <ion-list>
       <ion-list-header color="primary">
         <h2 class="ion-text-center">Browse Products</h2>
       </ion-list-header>
-      <ion-item class="ion-no-padding" color="light" *ngFor="let item of items">
+      <ion-item class="ion-no-padding" color="light" *ngFor="let item of items" (click)="onItemSelected(item)">
         <ion-grid>
           <ion-row>
             <ion-col size="4" class="ion-margin-top">
@@ -68,9 +68,15 @@
             </ion-col>
             <ion-col size="8" class="ion-padding-start">
               <h4>{{ item.name }}</h4>
-              <p>{{ item.description }}</p>
+              <p>
+                {{ item.description }}
+                <ion-button class="ion-float-right" 
+                [disabled]="item.amount < 1"
+                (click)="addToCart($event, item)">Add</ion-button>
+              </p>
               <!-- <small>500gm</small> -->
               <h5>{{ item.price | currency:'INR' }}</h5>
+              <span *ngIf="item.amount < 1"><ion-text color="danger">Out of stock</ion-text></span>
             </ion-col>
           </ion-row>
         </ion-grid>
