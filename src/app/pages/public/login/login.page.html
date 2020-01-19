@@ -7,42 +7,63 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-list lines="full" class="ion-no-margin ion-padding">
-      <ion-item>
-        <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="email"
-        formControlName="email"></ion-input>
-        <div class="error-messages" *ngIf="f.email.touched && f.email.errors">
-          <ion-text color="danger">
-            <small *ngIf="f.email.errors?.required" >email is required</small>
-            <small *ngIf="f.email.errors?.email" >enter a valid email</small>
-          </ion-text>
-        </div>
-      </ion-item>
+<ion-content class="animated fadeIn login auth-page ion-padding">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
 
-      <ion-item>
-        <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="password"
-        formControlName="password"></ion-input>
-        <div class="error-messages" *ngIf="f.password.touched && f.password.errors">
-          <ion-text color="danger">
-            <small *ngIf="f.password.errors?.required">password is required</small>
-            <small *ngIf="f.password.errors?.minlength">Minimum length of password is 6</small>
-          </ion-text>
-        </div>
+    <!-- Logo -->
+    <div class="animated fadeInDown ion-padding-horizontal text-center">
+      <div class="logo"></div>
+      <h4 class="ion-no-margin ion-text-center">
+        <ion-text color="light" class="fw700">
+          Welcome to 11Cart
+        </ion-text>
+      </h4>
+    </div>
+
+    <form [formGroup]="loginForm" class="list-form" (ngSubmit)="onSubmit()">
+      <ion-item class="animated fadeInUp ion-no-padding">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Email
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
       </ion-item>
-    </ion-list>
-    <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin">Login</ion-button>
-      <div class="error-messages ion-margin-top ion-text-center" 
-      *ngIf="isSubmitted && loginForm.invalid">
+      <div class="error-messages" *ngIf="f.email.touched && f.email.errors">
         <ion-text color="danger">
-          <small>Form is invalid!</small>
+          <small *ngIf="f.email.errors?.required" >email is required</small>
+          <small *ngIf="f.email.errors?.email" >enter a valid email</small>
         </ion-text>
       </div>
+
+      <ion-item class="animated fadeInUp ion-no-padding">
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div class="error-messages" *ngIf="f.password.touched && f.password.errors">
+        <ion-text color="danger">
+          <small *ngIf="f.password.errors?.required">password is required</small>
+          <small *ngIf="f.password.errors?.minlength">Minimum length of password is 6</small>
+        </ion-text>
+      </div>
+      <div class="ion-margin-top">
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" type="submit">
+          <ion-icon name="log-in"></ion-icon>
+          Login
+        </ion-button>
+      </div>
+    </form>
+
+    <!-- Other links -->
+    <div class="ion-text-center ion-margin-top">
+      <span class="paz" tappable>
+        <ion-text color="light">
+          New here? <strong><ion-text><a routerLink="/register">Signup Here</a></ion-text></strong>
+        </ion-text>
+      </span>
     </div>
-    <p class="ion-padding ion-text-center">Not Registered? <ion-text><a routerLink="/register">Signup Here</a></ion-text></p>
-  </form>
+  </div>
 </ion-content>

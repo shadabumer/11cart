@@ -7,10 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <ion-list lines="full" class="ion-no-margin ion-padding">
-        <ion-item>
+<ion-content class="login auth-page ion-padding">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="list-form">
+        <ion-item class="animated fadeInUp">
           <ion-label position="stacked">First Name <ion-text color="danger">*</ion-text></ion-label>
           <ion-input type="text"
           formControlName="firstName"></ion-input>
@@ -79,10 +78,11 @@
         </div>
       </ion-item>
 
-    </ion-list>
-
     <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin">Sign Up</ion-button>
+      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" type="submit">
+        <ion-icon name="log-in"></ion-icon>
+        Sign Up
+      </ion-button>
       <div class="error-messages ion-margin-top ion-text-center" 
       *ngIf="isSubmitted && registerForm.invalid">
         <ion-text color="danger">
@@ -90,6 +90,6 @@
         </ion-text>
       </div>
     </div>
-    <p class="ion-padding ion-text-center">Already Registered? <ion-text><a routerLink="/login">Sign In Here</a></ion-text></p>
+    <p class="ion-padding ion-text-center">Already Registered? <strong><a routerLink="/login">Sign In Here</a></strong></p>
   </form>
 </ion-content>
