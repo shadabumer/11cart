@@ -42,14 +42,10 @@
             </ion-col>
           </ion-row>
           <ng-template #categoryButton>
-            <!-- <ion-row>
-              <ion-col size="12" offest="3"> -->
-                <ion-button [routerLink]="['/tabs/tab2']" 
-                expand="block" 
-                shape="round" 
-                fill="outline">View More</ion-button>
-              <!-- </ion-col>
-            </ion-row> -->
+            <ion-button (click)="viewMore($event)"
+            expand="block" 
+            shape="round" 
+            fill="outline">View More</ion-button>
           </ng-template>
       </ion-grid>
     </ion-card-content>
@@ -60,7 +56,8 @@
       <ion-list-header color="primary">
         <h2 class="ion-text-center">Browse Products</h2>
       </ion-list-header>
-      <ion-item class="ion-no-padding" color="light" *ngFor="let item of items" (click)="onItemSelected(item)">
+      <!-- <ion-item class="ion-no-padding" *ngFor="let item of items" > -->
+        <ion-card (click)="onItemSelected(item)" *ngFor="let item of items">
         <ion-grid>
           <ion-row>
             <ion-col size="4" class="ion-margin-top">
@@ -80,7 +77,8 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-item>
+      </ion-card>
+      <!-- </ion-item> -->
     </ion-list>
   <!-- product list ends here -->
 

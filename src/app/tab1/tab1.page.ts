@@ -62,4 +62,9 @@ export class Tab1Page implements OnInit {
     this.cartService.addProduct(item);
   }
 
+  viewMore(e) {
+    e.stopPropagation();
+    this.router.navigate(['tabs', 'tab2']);
+  }
+
 }
