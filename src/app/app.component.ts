@@ -28,6 +28,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.statusBar.backgroundColorByHexString('#2e256d');
+      this.statusBar.styleLightContent();
 
       this.authenticationService.authenticationState.subscribe(state => {
         if (state) {
