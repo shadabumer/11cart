@@ -32,7 +32,18 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-grid>
+      <div class="row">
+        <div class="column" *ngFor="let category of categories; let i = index" 
+        (click)="onSelectCategory(category.id)">
+          <ion-img [src]="category.imageUrl" [alt]="category.name"></ion-img>
+          <ion-label class="ion-text-center">{{ category.name }}</ion-label>
+        </div>
+        <!-- <div class="column">
+          <ion-img [src]="category.imageUrl" [alt]="category.name"></ion-img>
+          <ion-label style="align-items: center;">{{ category.name }}</ion-label>
+        </div> -->
+      </div>
+      <!-- <ion-grid>
         <ion-row  class="ion-justify-content-center">
             <ion-col size="6" *ngFor="let category of categories; let i = index" (click)="onSelectCategory(category.id)">
               <ng-container *ngIf="i < 6; else categoryButton">
@@ -47,7 +58,7 @@
             shape="round" 
             fill="outline">View More</ion-button>
           </ng-template>
-      </ion-grid>
+      </ion-grid> -->
     </ion-card-content>
   </ion-card>
 
