@@ -10,9 +10,10 @@
   max-width: 50%;
   padding: 0 4px;
   border: 1px solid #ccc;
+  text-align: center;
 
   ion-img {
-    margin-top: 8px;
+    margin: 8px 0;
     vertical-align: middle;
     border-bottom: 1px solid #ccc;
     width: 100%;
@@ -25,3 +26,26 @@
     text-align: center;
   }
 }
+
+.no-border {
+  border: none;
+  text-align: center;
+  margin: 0.5rem auto;
+}
+
+.item-image {
+  margin: auto;
+}
+
+.item-list {
+  
+  h5, h4 {
+    color: black;
+  }
+  p {
+    font-size: 1rem;
+    margin: 0 0 0.75rem 0;
+    font-weight: bold;
+  }
+}
+

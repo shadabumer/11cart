@@ -12,7 +12,7 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <ion-row >
-      <ion-col *ngFor="let category of categories" size="6">
+      <ion-col *ngFor="let category of categories" size="12">
         <ion-card (click)="onSelectItem(category.id)">
           <ion-card-content class="ion-no-padding">
             <img [src]="category.imageUrl"  alt="" />
