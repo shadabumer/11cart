@@ -44,4 +44,12 @@ export class ManageItemsService {
   getItemsByCategory(categoryId: string) {
     return this.db.collection('items', ref => ref.where('categoryId', '==', categoryId)).valueChanges({ idField: 'id' });
   }
+
+  getStock(id: string) {
+    return this.db.collection('stock').doc(id).valueChanges();
+  }
+
+  getAllStocks() {
+    return this.db.collection('stock').valueChanges();
+  }
 }
