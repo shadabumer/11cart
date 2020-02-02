@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { ItemListPageRoutingModule } from './item-list-routing.module';
 
 import { ItemListPage } from './item-list.page';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { SearchComponent } from 'src/app/components/search/search.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ItemListPageRoutingModule
+    ItemListPageRoutingModule,
+    ComponentsModule,
   ],
-  declarations: [ItemListPage]
+  declarations: [ItemListPage],
+  entryComponents: [SearchComponent]
 })
 export class ItemListPageModule {}

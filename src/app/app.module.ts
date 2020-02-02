@@ -14,10 +14,11 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { ComponentsModule } from './components/components.module';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
@@ -27,9 +28,11 @@ import { environment } from 'src/environments/environment';
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ComponentsModule,
 
   ],
+  entryComponents: [SearchComponent],
   providers: [
     StatusBar,
     SplashScreen,

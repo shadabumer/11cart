@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { UnAuthGuard } from './guards/un-auth-guard.guard';
+import { OrdersComponent } from './pages/account/orders/orders.component';
 // import { AngularFireAuthGuard, redirectUnauthorizedTo, canActivate  } from '@angular/fire/auth-guard';
 
 
@@ -13,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/public/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/public/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [UnAuthGuard]
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/public/register/register.module').then( m => m.RegisterPageModule),
+    canActivate: [UnAuthGuard]
   },
   {
     path: 'item-list',
@@ -36,7 +40,11 @@ const routes: Routes = [
   {
     path: 'address',
     loadChildren: () => import('./pages/account/address/address.module').then( m => m.AddressPageModule)
-  }
+  },
+  // {
+  //   path: 'orders',
+  //   component: OrdersComponent
+  // }
 
 
 ];
