@@ -65,6 +65,8 @@ export class Tab3Page implements OnInit, OnDestroy {
 
     console.log('cart items:', this.cart);
     this.updateStock();
+    this.updateOrders();
+    
     this.cartService.emptyCart();
     this.cart = [];
 
@@ -89,16 +91,22 @@ export class Tab3Page implements OnInit, OnDestroy {
               stockId: stock.stockId, 
               stock: stock.stock, 
               amount: item.amount
-            });
-          } 
-        })
-      }
+          });
+        } 
+      })
+    }
 
     cartItemStock.forEach(item => {
       let newStock: Stock = {
         stock: item.stock - item.amount
       }
       this.itemService.updateStock(item.stockId, newStock);
+    })
+  }
+
+  updateOrders() {
+    this.cart.forEach(cartItem => {
+      this.cartService.createOrder(cartItem);
     })
   }
 

@@ -140,4 +140,34 @@ export class CartService {
     .doc(item.id).set(cartItem);
   }
 
+  createOrder(item: Item) {
+    let cartItem: CartItem = {
+      amount: item.amount,
+      date: new Date(),
+      imageUrl: item.imageUrl,
+      name: item.name,
+      orderNo: Date.now(),
+      price: item.price,
+      itemId: item.id
+    }
+    
+    const id = `${cartItem.name}${cartItem.orderNo}`.trim();
+    this.db.collection('orders').doc(this.userId).collection('orderItems')
+    .doc(id).set(cartItem);
+  }
+
+  getOrder() {
+    return this.db.collection<CartItem[]>('orders').doc(this.userId).collection('orderItems',
+    ref => ref.orderBy('orderNo', 'desc').limit(10))
+    .snapshotChanges()
+    .pipe(map((document) => {
+      return document.map(changes => {
+        return {
+          id: changes.payload.doc.id,
+          ...changes.payload.doc.data()
+        }
+      })
+    }))
+  }
+
 }
