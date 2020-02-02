@@ -7,7 +7,7 @@ import { ManageItemsService } from '../shared/manage-items.service';
 import { Stock } from '../models/stock.model';
 import { Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { timingSafeEqual } from 'crypto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -16,27 +16,44 @@ import { timingSafeEqual } from 'crypto';
 })
 export class Tab3Page implements OnInit, OnDestroy {
   cart: Item[] = [];
-  subscriptions: Subscription[];
+  stocks: Stock[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor(private cartService: CartService,
     private itemService: ManageItemsService,
     private alertCtrl: AlertController,
-    private db: AngularFirestore) { }
+    private db: AngularFirestore,
+    private router: Router) { }
 
   ngOnInit() {
+    this.cart = this.cartService.getcart();
+    let subscription: Subscription = this.itemService.getAllStocks()
+    .subscribe((stocksData: any[]) => {
+      this.stocks = stocksData;
+    });
+    if(subscription)
+      this.subscriptions.push(subscription);
+  }
+  
+  ionViewWillEnter() {
     this.cart = this.cartService.getcart();
   }
 
   decreaseCartItem(product: Item) {
     this.cartService.decreaseProduct(product);
+    this.cart = this.cartService.getcart();
+
   }
 
   increaseCartItem(product: Item) {
     this.cartService.addProduct(product);
+    this.cart = this.cartService.getcart();
   }
 
   removeCartItem(product: Item) {
     this.cartService.removeProduct(product);
+    this.cart = this.cartService.getcart();
+
   }
 
   getTotal() {
@@ -45,10 +62,11 @@ export class Tab3Page implements OnInit, OnDestroy {
 
   async checkout() {
     // Perfom PayPal or Stripe checkout process
-    console.log('cart items:', this.cart);
 
+    console.log('cart items:', this.cart);
     this.updateStock();
-    
+    this.cartService.emptyCart();
+    this.cart = [];
 
     let alert = await this.alertCtrl.create({
       header: 'Thanks for your Order!',
@@ -56,50 +74,32 @@ export class Tab3Page implements OnInit, OnDestroy {
       buttons: ['OK']
     });
     alert.present();
+    this.router.navigate(['account', 'orders']);
+
   }
 
   // Decreasing the stock of selected item
   updateStock() {
-    // this.cart.forEach(item => {
-    //   let subscribe:Subscription = this.itemService.getStock(item.id)
-    //     .subscribe((data: Stock) => {
-    //       let stock: Stock = {
-    //         stock: data.stock - item.amount
-    //       };
-    //       console.log(item.name, stock.stock);
-    //       this.itemService.updateStock(item.id, stock);
-    //     })
-      
-    // });
+    let cartItemStock = [];
+    for (let stock of this.stocks) {
+      this.cart.forEach(item => {
+        if (item.id === stock.stockId) {
+          cartItemStock.push(
+            {
+              stockId: stock.stockId, 
+              stock: stock.stock, 
+              amount: item.amount
+            });
+          } 
+        })
+      }
 
-    // this.cart.forEach(item => {
-    //   let cartItem = this.db.collection('stocks', ref => ref.where(ref.id, '==', item.id)).get();
-    //   console.log('cart stock items:', cartItem);
-    // })
-   let stocks = [];
-
-   this.cart.forEach(item => {
-     this.itemService.getStock(item.id).subscribe((data: Stock) => {
-       stocks.push(data.stock);
-     });
-   })
-   console.log('stocks data:', stocks);
-
-   this.cart.forEach((item, index) => {
-     console.log('stocks[index]', stocks[index]);
-    let stock: Stock = {
-      stock: stocks[index] - item.amount
-    };
-    this.itemService.updateStock(item.id, stock);
-
-    this.db.collection('stocks').doc(item.id).set({stock: stock - item.amount})
-   })
-    // stockIds.forEach(id => {
-    //   let stock: Stock = {
-    //     stock: 5
-    //   };
-    //   this.itemService.updateStock(id, stock);
-    // }) 
+    cartItemStock.forEach(item => {
+      let newStock: Stock = {
+        stock: item.stock - item.amount
+      }
+      this.itemService.updateStock(item.stockId, newStock);
+    })
   }
 
   ngOnDestroy() {

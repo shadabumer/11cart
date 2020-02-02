@@ -42,11 +42,6 @@ export class Tab1Page implements OnInit {
       this.items = itemsList;
       this.isItemsLoaded = true;
     })
-
-    this.itemService.getItemsByCategory("MMjQND8mlW0shkW7twLD")
-      .subscribe( items => {
-        console.log('items by category:', items);
-      })
   }
 
   onItemSelected(item: Item) {

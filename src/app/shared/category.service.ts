@@ -23,7 +23,7 @@ export class CategoryService {
   getCategories() {
     return this.db.collection('categories').snapshotChanges()
     .pipe(map((document) => {
-      return document.map( changes => {
+      return document.map( (changes: any) => {
         return {
           id: changes.payload.doc.id,
           ...changes.payload.doc.data(),

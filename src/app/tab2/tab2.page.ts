@@ -20,7 +20,6 @@ export class Tab2Page implements OnInit {
     this.categoryService.getCategories()
       .subscribe((categoryList: any) => {
         this.categories = categoryList;
-        // console.log(this.categories);
       })
   }
 

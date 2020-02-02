@@ -25,7 +25,7 @@ export class ManageItemsService {
   getItems() {
     return this.db.collection('items').snapshotChanges()
       .pipe(map(document => {
-        return document.map(changes => {
+        return document.map((changes: any) => {
           return {
             id: changes.payload.doc.id,
             ...changes.payload.doc.data(),
@@ -55,6 +55,6 @@ export class ManageItemsService {
   }
 
   getAllStocks() {
-    return this.db.collection('stock').valueChanges();
+    return this.db.collection('stock').valueChanges({idField: 'stockId'});
   }
 }
