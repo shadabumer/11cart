@@ -41,10 +41,6 @@ const routes: Routes = [
     path: 'address',
     loadChildren: () => import('./pages/account/address/address.module').then( m => m.AddressPageModule)
   },
-  // {
-  //   path: 'orders',
-  //   component: OrdersComponent
-  // }
 
 
 ];

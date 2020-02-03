@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="current-address">
+  <div class="current-address" *ngIf="currentAdddress$ | async as currentAddres">
     <!-- <ion-label>Current-Address:</ion-label> -->
     <ion-card>
       <ion-item>
@@ -20,22 +20,22 @@
       </ion-item>
     
       <ion-card-content>
-        <h5>House No: {{ '123' }}</h5>
-        <h5>Apartment Name: {{ 'lorem room' }}</h5>
-        <h5>Area details: {{ 'lorem in so and so ipsum' }}</h5>
-        <h5>City: {{ 'dolot sitamet' }}</h5>
-        <h5>Pincode: {{ '223344' }}</h5>
+        <h5>House No: {{ currentAdddress.houseNo }}</h5>
+        <h5>Building Name: {{ currentAdddress.buildingName }}</h5>
+        <h5>Area details: {{ currentAdddress.areaDetails }}</h5>
+        <h5>City: {{ currentAdddress.city }}</h5>
+        <h5>Pincode: {{ currentAdddress.pincode }}</h5>
         <ion-button color="primary" class="ion-margin-top">Edit</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
 
   <div class="address-form">
-    <form>
+    <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
       <ion-list lines="full" class="ion-no-margin ion-padding">
           <ion-item>
             <ion-label position="stacked">House No. <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input type="text"
+            <ion-input type="text" formControlName="houseNo"
             ></ion-input>
             <!-- <div class="error-messages" *ngIf="f.firstName.touched && f.firstName.errors">
               <ion-text color="danger">
@@ -45,8 +45,8 @@
           </ion-item>
   
           <ion-item>
-            <ion-label position="stacked">Apartment Name <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input type="text"
+            <ion-label position="stacked">Building Name <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input type="text" formControlName="buildingName"
             ></ion-input>
             <!-- <div class="error-messages" *ngIf="f.lastName.touched && f.lastName.errors">
               <ion-text color="danger">
@@ -57,7 +57,7 @@
   
           <ion-item>
             <ion-label position="stacked">Area Details <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input type="number"
+            <ion-input type="text" formControlName="areaDetails"
             ></ion-input>
             <!-- <div class="error-messages" *ngIf="f.mobile.touched && f.mobile.errors">
               <ion-text color="danger">
@@ -68,7 +68,7 @@
   
         <ion-item>
           <ion-label position="stacked">City <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input type="email"
+          <ion-input type="text" formControlName="city"
           ></ion-input>
           <!-- <div class="error-messages" *ngIf="f.email.touched && f.email.errors">
             <ion-text color="danger">
@@ -80,7 +80,7 @@
   
         <ion-item>
           <ion-label position="stacked">Pincode <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input type="password"
+          <ion-input type="number" formControlName="pincode"
           ></ion-input>
           <!-- <div class="error-messages" *ngIf="f.password.touched && f.password.errors">
             <ion-text color="danger">
