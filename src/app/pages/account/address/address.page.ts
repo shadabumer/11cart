@@ -12,9 +12,8 @@ import { Subscription, Observable } from 'rxjs';
 export class AddressPage implements OnInit {
   addressForm: FormGroup;
   isSubmitted: boolean = false;
-  currentAddress: Address;
   subscription: Subscription;
-  currentAdddress$: Observable<Address>;
+  currentAdddress$: Observable<any>;
 
 
   constructor(private address: AddressService) { }
@@ -29,21 +28,17 @@ export class AddressPage implements OnInit {
     });
 
     //getting current address
-    // this.subscription = this.address.getAddress()
-    // .subscribe((addressData: Address) => {
-    //   this.currentAddress = addressData;
-    //   console.log('current Address', this.currentAddress);
-    // })
+    this.currentAdddress$ = this.address.getAddress();
   }
 
-   // convenience getter for easy access to form fields
-   get f() { return this.addressForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.addressForm.controls; }
 
-   onSubmit() {
+  onSubmit() {
     this.isSubmitted = true;
     if (this.addressForm.invalid) return;
 
-    let newAddress: Address =  {
+    let newAddress: Address = {
       houseNo: this.f.houseNo.value,
       buildingName: this.f.buildingName.value,
       areaDetails: this.f.areaDetails.value,
@@ -55,6 +50,6 @@ export class AddressPage implements OnInit {
 
     this.addressForm.reset();
     this.isSubmitted = false;
-   }
+  }
 
 }
