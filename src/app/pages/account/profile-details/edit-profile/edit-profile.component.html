@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      {{ 'Edit-Profile' }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <ion-list lines="full" class="ion-no-margin">
+      <ion-item>
+        <ion-label position="stacked">First Name:
+        </ion-label>
+        <ion-input type="text" formControlName="firstName"></ion-input>
+
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Last Name:
+        </ion-label>
+        <ion-input type="text" formControlName="lastName"></ion-input>
+
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Mobile No: 
+        </ion-label>
+        <ion-input type="text" formControlName="mobile"></ion-input>
+
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+  </form>
+
+</ion-content>

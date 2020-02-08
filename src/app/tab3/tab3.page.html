@@ -67,7 +67,8 @@
     </ion-list>
  
     <ion-button expand="full" (click)="checkout()"
-    size="medium" expand="full" shape="round" color="primary">
+    size="medium" expand="full" shape="round" color="primary"
+    [disabled]="cart.length == 0">
       Checkout
     </ion-button>
   </div>
