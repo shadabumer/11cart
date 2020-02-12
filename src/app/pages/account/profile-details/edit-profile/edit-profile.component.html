@@ -7,7 +7,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+  <form [formGroup]="profileForm">
     <ion-list lines="full" class="ion-no-margin">
       <ion-item>
         <ion-label position="stacked">First Name:
@@ -29,7 +30,11 @@
       </ion-item>
     </ion-list>
 
-    <ion-button expand="block" type="submit" class="ion-no-margin">Save</ion-button>
   </form>
 
 </ion-content>
+
+<ion-footer>
+  <ion-button expand="block" type="submit" class="ion-no-margin"
+  (click)="onSubmit()">Save</ion-button>
+</ion-footer>

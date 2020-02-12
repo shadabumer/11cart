@@ -31,6 +31,8 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#2e256d');
       this.statusBar.styleLightContent();
 
+      // this.authenticationService.checkToken();
+
       this.authenticationService.authenticationState.subscribe(state => {
         if (state) {
           this.router.navigate(['tabs', 'tab1']);

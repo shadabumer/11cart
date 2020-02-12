@@ -38,7 +38,7 @@ export class UsersService {
   }
 
   getUser(id: string) {
-    return this.db.collection('users').doc(id).get();
+    return this.db.collection('users').doc(id).valueChanges();
   }
   
   // Sign in with email/password
@@ -46,11 +46,12 @@ export class UsersService {
     const user = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
     
     const userToken = user.user.refreshToken;
+    console.log('userToken:', userToken);
     this.storage.set(TOKEN_KEY, userToken).then(() => {
       this.authenticationState.next(true);
     });
     return user;
-  }
+  }  
 
   async logout() {
     await this.afAuth.auth.signOut;
@@ -67,6 +68,7 @@ export class UsersService {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
         console.log('check token res:', res);
+        console.log('users id:',this.afAuth.auth.currentUser.uid);
         this.authenticationState.next(true);
       }
     })
