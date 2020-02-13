@@ -44,12 +44,14 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let editUser: User = {
+      id: this.user.userDetails().uid,
       firstName: this.f.firstName.value,
       lastName: this.f.lastName.value,
       mobile: this.f.mobile.value,
       email: this.currentUser.email
     }
     console.log('form submitted:', editUser);
+    this.user.updateUser(editUser);
     this.modalCtrl.dismiss({ 'dismissed': true });
   }
 

@@ -78,4 +78,8 @@ export class UsersService {
     return this.authenticationState.value;
   }
 
+  updateUser(user: User) {
+    return this.db.collection('users').doc(user.id).update({...user});
+  }
+
 }
