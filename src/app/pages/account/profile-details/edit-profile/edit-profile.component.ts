@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { UsersService } from 'src/app/shared/users.service';
 import { User } from 'src/app/models/user.model';
-import { Subscription } from 'rxjs';
 import { NavParams, ModalController } from '@ionic/angular';
 
 @Component({
@@ -12,23 +11,10 @@ import { NavParams, ModalController } from '@ionic/angular';
 })
 export class EditProfileComponent implements OnInit, OnDestroy {
   profileForm: FormGroup;
-  isSubmitted: boolean = false;
   currentUser: User;
-  isUserLoaded: boolean = false;
-  subscription: Subscription;
-
-
 
   constructor(private user: UsersService, navParams: NavParams, private modalCtrl: ModalController) {
     this.currentUser = navParams.get('currentUser');
-    // let userId = this.user.userDetails().uid;
-
-    // this.subscription =  this.user.getUser(userId).subscribe((userData: User) => {
-    //   console.log('user data:', userData);
-    //   this.currentUser = userData;
-    //   this.isUserLoaded = true;
-
-    // })
    }
 
   ngOnInit() {
@@ -55,9 +41,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this.modalCtrl.dismiss({ 'dismissed': true });
   }
 
-
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
   }
 
 }

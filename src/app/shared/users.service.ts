@@ -53,18 +53,19 @@ export class UsersService {
     return user;
   }  
 
-  async logout() {
-    await this.afAuth.auth.signOut;
+  logout() {
+    this.afAuth.auth.signOut;
+    console.log('logout user details:', this.userDetails().uid);
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
     });
   }
   
-   userDetails(){
-     return this.afAuth.auth.currentUser;
-   }
+  userDetails(){
+    return this.afAuth.auth.currentUser;
+  }
 
-   checkToken() {
+  checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
         console.log('check token res:', res);

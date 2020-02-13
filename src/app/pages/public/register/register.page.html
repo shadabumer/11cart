@@ -8,6 +8,15 @@
 </ion-header>
 
 <ion-content class="login auth-page ion-padding">
+  <!-- Logo -->
+  <div class="animated fadeInDown ion-padding text-center">
+    <h4 class="ion-no-margin ion-text-center">
+      <ion-text color="light" class="fw700">
+        Welcome to 11Cart
+      </ion-text>
+    </h4>
+  </div>
+  
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="list-form">
     <ion-item class="animated fadeInUp">
       <ion-label position="stacked">First Name <ion-text color="danger">*</ion-text>
@@ -69,11 +78,17 @@
     <ion-item>
       <ion-label position="stacked">Confirm Password <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="password" formControlName="confirmPassword"></ion-input>
+      <ion-input type="password" formControlName="confirmPassword" 
+      (ionChange)="confirmPassword()"
+      [debounce]="1000"></ion-input>
+      <ion-text color="danger">
+        <small *ngIf="!isPasswordMatch">Password does not match!</small>
+      </ion-text>
       <div class="error-messages" *ngIf="f.confirmPassword.touched && f.confirmPassword.errors">
         <ion-text color="danger">
           <small *ngIf="f.confirmPassword.errors?.required">confirm password is required</small>
           <small *ngIf="f.confirmPassword.errors?.minlength">Minimum length of password is 6</small>
+
         </ion-text>
       </div>
     </ion-item>

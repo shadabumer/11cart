@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/shared/users.service';
 import { User } from 'src/app/models/user.model';
-import { MustMatch } from '../../../helpers/MustMatch.validator'
 
 @Component({
   selector: 'app-register',
@@ -12,6 +11,7 @@ import { MustMatch } from '../../../helpers/MustMatch.validator'
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   isSubmitted: boolean = false;
+  isPasswordMatch: boolean = true;
 
   constructor(private users: UsersService) { }
 
@@ -28,8 +28,16 @@ export class RegisterPage implements OnInit {
     });
   }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.registerForm.controls; }
+
+  confirmPassword() {
+    if(this.f.password.value !== this.f.confirmPassword.value) {
+      this.isPasswordMatch = false;
+    } else {
+      this.isPasswordMatch = true;
+    }
+  }
 
   onSubmit() {
     this.isSubmitted = true;
