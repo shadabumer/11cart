@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Address } from 'src/app/models/address.model';
 import { AddressService } from 'src/app/shared/address.service';
 import { Subscription, Observable } from 'rxjs';
+import { UsersService } from 'src/app/shared/users.service';
 
 @Component({
   selector: 'app-address',
@@ -14,9 +15,14 @@ export class AddressPage implements OnInit {
   isSubmitted: boolean = false;
   subscription: Subscription;
   currentAdddress$: Observable<any>;
+  userId: string = ""
 
 
-  constructor(private address: AddressService) { }
+  constructor(private address: AddressService,
+    private user: UsersService) {
+      this.userId = this.user.userDetails().uid;
+      console.log('userId:', this.userId);
+     }
 
   ngOnInit() {
     this.addressForm = new FormGroup({

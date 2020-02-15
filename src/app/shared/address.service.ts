@@ -15,7 +15,7 @@ export class AddressService {
      }
 
     createAddress(address: Address) {
-      this.db.collection('address').doc(this.userId).set(address)
+      this.db.collection('address').doc(this.userId).set(address);
     }
 
     getAddress() {
