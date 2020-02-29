@@ -45,6 +45,10 @@ const routes: Routes = [
     path: 'checkout',
     loadChildren: () => import('./pages/items/checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
+  {
+    path: 'payments',
+    loadChildren: () => import('./pages/payments/payments.module').then( m => m.PaymentsPageModule)
+  },
 
 
 ];
