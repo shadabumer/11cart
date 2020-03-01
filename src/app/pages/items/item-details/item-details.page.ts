@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { UsersService } from 'src/app/shared/users.service';
 import { User } from 'src/app/models/user.model';
