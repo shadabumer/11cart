@@ -15,6 +15,6 @@ import { CheckoutPage } from './checkout.page';
     IonicModule,
     CheckoutPageRoutingModule
   ],
-  declarations: [CheckoutPage]
+  declarations: [CheckoutPage],
 })
 export class CheckoutPageModule {}

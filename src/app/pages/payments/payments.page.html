@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center">
-      {{ 'Pyaments' }}
+      {{ 'Payments' }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,14 +21,14 @@
       <ion-item>
         <ion-label>COD</ion-label>
         <ion-radio value="cod" 
-        (ionFocus)="isCardSelected = true"
+        (ionFocus)="isCardSelected = true; isPaymentNotSelected = false"
         ></ion-radio>
       </ion-item>
   
       <ion-item>
         <ion-label>Debit card</ion-label>
         <ion-radio value="card" 
-        (ionFocus)="isCardSelected = false"></ion-radio>
+        (ionFocus)="isCardSelected = false; isPaymentNotSelected = false"></ion-radio>
       </ion-item>
   
     </ion-radio-group>
@@ -71,5 +71,9 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button color="secondary" type="submit" expand="full" (click)="onSubmit()">Place your order</ion-button>
+  <ion-button color="secondary" 
+  type="submit" 
+  expand="full" 
+  (click)="onSubmit()"
+  [disabled]="isPaymentNotSelected">Place your order</ion-button>
 </ion-footer>
