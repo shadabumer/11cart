@@ -57,4 +57,8 @@ export class ManageItemsService {
   getAllStocks() {
     return this.db.collection('stock').valueChanges({idField: 'stockId'});
   }
+
+  feedback(itemId: string, userId: string, feedback: any) {
+    return this.db.collection('feedbacks').doc(itemId).collection('users').doc(userId).set(feedback);
+  }
 }
