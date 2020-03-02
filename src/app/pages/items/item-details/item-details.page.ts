@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/shared/users.service';
 import { User } from 'src/app/models/user.model';
 import { ManageItemsService } from 'src/app/shared/manage-items.service';
 import { ToastController } from '@ionic/angular';
+import { Feedback } from 'src/app/models/feedback.model';
 
 @Component({
   selector: 'app-item-details',
@@ -41,11 +42,11 @@ export class ItemDetailsPage implements OnInit {
   }
 
   onSubmit() {
-    const newFeedback = {
+    const newFeedback: Feedback = {
       name: this.currentUser.firstName + ' ' + this.currentUser.lastName,
       feedback: this.feedback
     }
-    this.itemService.feedback(this.currentItem.id, this.currentUser.id, newFeedback)
+    this.itemService.createFeedback(this.currentItem.id, this.currentUser.id, newFeedback)
     .then(async data => { 
       console.log('feedback sent', data);
       const toast = await this.toastController.create({
