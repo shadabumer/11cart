@@ -49,6 +49,13 @@
           <small *ngIf="f.password.errors?.minlength">Minimum length of password is 6</small>
         </ion-text>
       </div>
+
+      <p tappable (click)="forgotPass()" class="paz ion-text-right">
+        <ion-text color="light">
+          <strong>Forgot Pass?</strong>
+        </ion-text>
+      </p>
+
       <div class="ion-margin-top">
         <ion-button icon-left size="default" expand="full" shape="round" color="dark" type="submit">
           <ion-icon name="log-in"></ion-icon>

@@ -83,4 +83,8 @@ export class UsersService {
     return this.db.collection('users').doc(user.id).update({...user});
   }
 
+  async resetPassword(email: string) {
+    return await this.afAuth.auth.sendPasswordResetEmail(email);
+  }
+
 }

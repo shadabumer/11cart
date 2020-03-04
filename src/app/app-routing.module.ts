@@ -49,6 +49,10 @@ const routes: Routes = [
     path: 'payments',
     loadChildren: () => import('./pages/payments/payments.module').then( m => m.PaymentsPageModule)
   },
+  {
+    path: 'password-reset',
+    loadChildren: () => import('./pages/public/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
 
 
 ];
