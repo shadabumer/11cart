@@ -87,4 +87,8 @@ export class UsersService {
     return await this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
+  async confirmPasswordReset(code: string, password: string) {
+    return await this.afAuth.auth.confirmPasswordReset(code, password);
+  }
+
 }
