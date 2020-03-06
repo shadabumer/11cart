@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/shared/users.service';
 import { User } from 'src/app/models/user.model';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,9 @@ export class RegisterPage implements OnInit {
   isSubmitted: boolean = false;
   isPasswordMatch: boolean = true;
 
-  constructor(private users: UsersService) { }
+  constructor(private users: UsersService,
+    private toastController: ToastController,
+    private router: Router,) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -23,8 +27,6 @@ export class RegisterPage implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
-    }, {
-      // validators: MustMatch('password', 'confirmPassword')
     });
   }
 
@@ -43,16 +45,29 @@ export class RegisterPage implements OnInit {
     this.isSubmitted = true;
     if (this.registerForm.invalid) return;
 
-    this.onCreateAccount();
-    this.onRegisterUser();
+    const newUser = this.onCreateAccount();
 
-    this.registerForm.reset();
-    this.isSubmitted = false;
+    newUser.then(async newUserData => {
+      await this.onRegisterUser();
+      this.registerForm.reset();
+
+      this.displayToast('Successfully registered, Please Login', 'Authentication-success');
+      this.router.navigate(['login']);
+
+      console.log('signup success: ', newUserData);
+      this.isSubmitted = false;
+
+    }).catch(error => {
+      this.displayToast(error.message, 'Authentication-error');
+      console.log('signup failed:', error);
+      this.isSubmitted = false;
+    })
+
   }
 
   onCreateAccount() {
     const newuser = this.users.createAccount(this.f.email.value, this.f.password.value);
-    console.log('new user:', newuser);
+    return newuser
   }
 
   onRegisterUser() {
@@ -64,7 +79,17 @@ export class RegisterPage implements OnInit {
       mobile: this.f.mobile.value
     }
 
-    this.users.registerUser(newUser);
+    return this.users.registerUser(newUser);
+  }
+
+  async displayToast(message: string, cssClass: string) {
+    const toast = await this.toastController.create({
+      message,
+      cssClass,
+      showCloseButton: true,
+      duration: 3000,
+    });
+    toast.present();
   }
 
 }

@@ -1,12 +1,3 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Registration</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="login auth-page ion-padding">
   <!-- Logo -->
   <div class="animated fadeInDown ion-padding text-center">
@@ -18,10 +9,10 @@
   </div>
   
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="list-form">
-    <ion-item class="animated fadeInUp">
+    <ion-item class="animated fadeInUp" lines="none">
       <ion-label position="stacked">First Name <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="text" formControlName="firstName"></ion-input>
+      <ion-input color="light" type="text" formControlName="firstName"></ion-input>
       <div class="error-messages" *ngIf="f.firstName.touched && f.firstName.errors">
         <ion-text color="danger">
           <small *ngIf="f.firstName.errors?.required">First name is required</small>
@@ -29,10 +20,10 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Last Name <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="text" formControlName="lastName"></ion-input>
+      <ion-input color="light" type="text" formControlName="lastName"></ion-input>
       <div class="error-messages" *ngIf="f.lastName.touched && f.lastName.errors">
         <ion-text color="danger">
           <small *ngIf="f.lastName.errors?.required">Last name is required</small>
@@ -40,10 +31,10 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Mobile <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="number" formControlName="mobile"></ion-input>
+      <ion-input color="light" type="number" formControlName="mobile"></ion-input>
       <div class="error-messages" *ngIf="f.mobile.touched && f.mobile.errors">
         <ion-text color="danger">
           <small *ngIf="f.mobile.errors?.required">mobile number is required</small>
@@ -51,10 +42,10 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Email <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-input color="light" type="email" formControlName="email"></ion-input>
       <div class="error-messages" *ngIf="f.email.touched && f.email.errors">
         <ion-text color="danger">
           <small *ngIf="f.email.errors?.required">email is required</small>
@@ -63,10 +54,10 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Password <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-input color="light" type="password" formControlName="password"></ion-input>
       <div class="error-messages" *ngIf="f.password.touched && f.password.errors">
         <ion-text color="danger">
           <small *ngIf="f.password.errors?.required">password is required</small>
@@ -75,10 +66,10 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-label position="stacked">Confirm Password <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input type="password" formControlName="confirmPassword" 
+      <ion-input color="light" type="password" formControlName="confirmPassword" 
       (ionChange)="confirmPassword()"
       [debounce]="1000"></ion-input>
       <ion-text color="danger">
@@ -94,17 +85,23 @@
     </ion-item>
 
     <div class="ion-padding">
-      <ion-button icon-left size="default" expand="full" shape="round" color="dark" type="submit">
+      <ion-button icon-left size="default" expand="full" 
+      shape="round" color="dark" type="submit"
+      [disabled]="registerForm.invalid">
         <ion-icon name="log-in"></ion-icon>
         &nbsp; Sign Up
       </ion-button>
-      <div class="error-messages ion-margin-top ion-text-center" *ngIf="isSubmitted && registerForm.invalid">
+      <!-- <div class="error-messages ion-margin-top ion-text-center" *ngIf="isSubmitted && registerForm.invalid">
         <ion-text color="danger">
           <small>Form is invalid!</small>
         </ion-text>
-      </div>
+      </div> -->
     </div>
     <p class="ion-padding ion-text-center">Already Registered? <strong><a routerLink="/login">Sign In Here</a></strong>
     </p>
   </form>
+  <div class="signup-loader" *ngIf="isSubmitted">
+    <p><ion-text color="light">Registering please wait...</ion-text></p>
+    <ion-spinner color="secondary" name="crescent"></ion-spinner>
+  </div>
 </ion-content>

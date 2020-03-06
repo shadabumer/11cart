@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsersService } from 'src/app/shared/users.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   isSubmitted: boolean = false;
 
-  constructor(public user: UsersService) { }
+  constructor(public user: UsersService,
+    private toastController: ToastController) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -28,10 +30,28 @@ export class LoginPage implements OnInit {
     if (this.loginForm.invalid) return;
 
     const user = this.user.login(this.f.email.value, this.f.password.value);
-    console.log('user logged in:', user);
+
+    user.then( userData => {
+      console.log('login success:', userData.user);
+      this.isSubmitted = false;
+      this.displayToast('login success', 'Authentication-success');
+    }).catch(error => {
+      console.log('login failure:', error);
+      this.isSubmitted = false;
+      this.displayToast(error.message, 'Authentication-error');
+    });
 
     this.loginForm.reset();
-    this.isSubmitted = false;
+  }
+
+  async displayToast(message: string, cssClass: string) {
+    const toast = await this.toastController.create({
+      message,
+      cssClass,
+      showCloseButton: true,
+      duration: 3000,
+    });
+    toast.present();
   }
 
 }
