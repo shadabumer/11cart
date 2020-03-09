@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>11Cart</name>
+    <name>Cart11</name>
     <description>e-commerce grocery app</description>
     <author email="info@geekmetricsolution.com" href="https://www.geekmetricsolution.com/">GEEKMETRIC SOLUTION</author>
     <content src="index.html" />

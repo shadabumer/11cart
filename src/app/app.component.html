@@ -1,6 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="menuContent">
-    <ion-menu contentId="menuContent" side="start" type="overlay">
+    <ion-menu contentId="menuContent" side="start" type="overlay" *ngIf="isAuthenticated">
       <ion-header >
         <ion-toolbar color="primary">
           <ion-title>Menu</ion-title>

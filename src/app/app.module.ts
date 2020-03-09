@@ -4,6 +4,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -26,6 +27,7 @@ import { SearchComponent } from './components/search/search.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),

@@ -77,7 +77,8 @@ export class RegisterPage implements OnInit {
       firstName: this.f.firstName.value,
       lastName: this.f.lastName.value,
       email: this.f.email.value,
-      mobile: this.f.mobile.value
+      mobile: this.f.mobile.value,
+      imageUrl: 'https://avatars.dicebear.com/v2/male/john.svg',
     }
     console.log('new user details:', newUser);
 

@@ -13,7 +13,7 @@
   <!-- profile name starts here -->
   <ion-card>
     <ion-avatar class="avatar">
-      <img src="https://avatars.dicebear.com/v2/male/john.svg"/>
+      <img [src]="(currentUser$ | async)?.imageUrl"/>
     </ion-avatar>
     <ion-card-header>
       <ion-card-title class="ion-text-center">
