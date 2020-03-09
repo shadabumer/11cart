@@ -20,4 +20,9 @@ export class AccountPage implements OnInit {
     console.log('display name:', this.userName);
   }
 
+  logout() {
+    const response = this.user.logout();
+    console.log('logged out:', response);
+  }
+
 }
