@@ -37,6 +37,8 @@ export class UploadImageComponent implements OnInit {
     isUploading:boolean;
     isUploaded:boolean;
 
+    isFileSuppported: boolean = true;
+
   constructor(
     private navParams: NavParams, 
     private modalCtrl: ModalController,
@@ -50,12 +52,14 @@ export class UploadImageComponent implements OnInit {
   ngOnInit() {}
 
   onUploadProfilePic(event: FileList) {
+    this.isFileSuppported = true;
     // The File object
-    const file = event.item(0)
+    const file = event.item(0);
  
     // Validation for Images Only
     if (file.type.split('/')[0] !== 'image') { 
-     console.error('unsupported file type :( ')
+     console.error('unsupported file type :( ');
+     this.isFileSuppported = false;
      return;
     }
  

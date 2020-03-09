@@ -31,6 +31,13 @@
       </div>
     </ion-card-content>
   </ion-card>
+
+  <p class="ion-text-center">
+    <ion-text color="danger" *ngIf="!isFileSuppported">
+      file type not supported.
+    </ion-text>
+  </p>
+
   <ion-card text-center *ngIf="isUploading && !isUploaded">
     <ion-card-header>
       <ion-card-title
