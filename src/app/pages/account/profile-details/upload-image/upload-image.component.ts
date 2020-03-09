@@ -74,6 +74,11 @@ export class UploadImageComponent implements OnInit {
     //File reference
     const fileRef = this.storage.ref(path);
  
+    // Deleting previous profile pic if any
+    if (this.currentUser.imageUrl.includes("firebasestorage")) {
+      this.deleteFile(this.currentUser.imageUrl)
+    }
+    
     // The main task
     this.task = this.storage.upload(path, file, { customMetadata });
  
@@ -98,6 +103,16 @@ export class UploadImageComponent implements OnInit {
           this.fileSize = snap.totalBytes;
       })
     )
+  }
+
+  deleteFile(url: string) {
+    this.storage.storage.refFromURL(url).delete()
+    .then(response => {
+      console.log('image deleted:', response);
+    })
+    .then(error => {
+      console.log('image not deleted:', error);
+    })
   }
 
   onClose() {

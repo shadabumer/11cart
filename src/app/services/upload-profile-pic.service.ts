@@ -21,4 +21,5 @@ export class UploadProfilePicService {
       console.log('imageurl updation failed', error);
     });
   }
+
 }
