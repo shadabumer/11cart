@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { UsersService } from './shared/users.service';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { ForgotPasswordPage } from './pages/public/forgot-password/forgot-password.page';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +21,20 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public authenticationService: UsersService,
-    private router: Router
+    private router: Router,
+    private deeplinks: Deeplinks
   ) {
     this.initializeApp();
+
+    this.deeplinks.route({
+      '/forgot-password': ForgotPasswordPage
+    }).subscribe(match => {
+      this.router.navigate(['forgot-password'], { queryParams : match.$args })
+      console.log('routes matched:', match);
+    }, nomatch => {
+      this.router.navigate(['']);
+      console.error('Got a deeplink that didn\'t match', nomatch);
+    })
   }
 
   initializeApp() {
