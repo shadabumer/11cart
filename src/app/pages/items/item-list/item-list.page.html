@@ -30,7 +30,7 @@
               <ion-icon name="basket"></ion-icon>
             </ion-button>
             </p>
-            <!-- <small>500gm</small> -->
+            <strong>{{ item?.units || '500gm' }}</strong>
             <h5>{{ item.price | currency:'INR' }}</h5>
             <span *ngIf="item.amount < 1"><ion-text color="danger">Out of stock</ion-text></span>
           </ion-col>

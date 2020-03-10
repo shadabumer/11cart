@@ -57,7 +57,7 @@
             <p>
               {{ item.description }}
             </p>
-            <strong>500gm</strong>
+            <strong>{{ item?.units || '500gm'}}</strong>
             <h5>{{ item.price | currency:'INR' }}
               <ion-button class="ion-float-right" [disabled]="item.amount < 1" 
               (click)="addToCart($event, item)">
