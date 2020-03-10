@@ -35,10 +35,8 @@ export class AppComponent {
 
       this.authenticationService.authenticationState.subscribe(state => {
         if (state) {
-          this.router.navigate(['tabs', 'tab1']);
           this.isAuthenticated = true;
         } else {
-          this.router.navigate(['login']);
           this.isAuthenticated = false;
         }
       });
@@ -47,6 +45,11 @@ export class AppComponent {
 
   logout() {
     const response = this.authenticationService.logout();
-    console.log('logged out:', response);
+    response.then( success => {
+      this.router.navigate(['login']);
+    })
+    .catch(error => {
+      console.log('something went wrong:', error);
+    })
   }
 }

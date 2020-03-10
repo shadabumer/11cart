@@ -49,6 +49,7 @@ export class RegisterPage implements OnInit {
     const newUser = this.onCreateAccount();
 
     newUser.then(async newUserData => {
+      this.newUserId = newUserData.user.uid;
       await this.onRegisterUser();
       this.registerForm.reset();
 

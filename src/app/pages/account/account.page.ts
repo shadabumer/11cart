@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/shared/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -11,7 +12,8 @@ export class AccountPage implements OnInit {
   currentUser$: Observable<any>;
   userName: string;
 
-  constructor(private user: UsersService) { }
+  constructor(private user: UsersService,
+    private router: Router) { }
 
   ngOnInit() {
     let userId = this.user.userDetails().uid;
@@ -22,7 +24,12 @@ export class AccountPage implements OnInit {
 
   logout() {
     const response = this.user.logout();
-    console.log('logged out:', response);
+    response.then( success => {
+      this.router.navigate(['login']);
+    })
+    .catch(error => {
+      console.log('something went wrong:', error);
+    })
   }
 
 }
