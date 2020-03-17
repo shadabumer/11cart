@@ -46,6 +46,19 @@
     <ion-list-header color="primary">
       <h2 class="ion-text-center">Browse Products</h2>
     </ion-list-header>
+    <div class="filter">
+      <ion-item>
+        <ion-label position="floating" color="primary">Filter By:</ion-label>
+        <ion-select multiple="true" [value]="['category', 'priceHigh']" [(ngModel)]="filterValue" interface="action-sheet"
+          (ionChange)="filter()"
+        >
+          <ion-select-option value="category">Category</ion-select-option>
+          <ion-select-option value="priceHigh">Price High</ion-select-option>
+          <ion-select-option value="priceLow">Price Low</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
     <ion-card (click)="onItemSelected(item)" *ngFor="let item of items">
       <ion-grid>
         <ion-row>

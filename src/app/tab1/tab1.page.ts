@@ -24,6 +24,7 @@ export class Tab1Page implements OnInit {
   isCategoriesLoaded: boolean = false;
   items: Item[];
   isItemsLoaded: boolean = false;
+  filterValue: any;
   
   constructor(public categoryService: CategoryService,
               public itemService: ManageItemsService,
@@ -62,4 +63,7 @@ export class Tab1Page implements OnInit {
     this.router.navigate(['tabs', 'tab2']);
   }
 
+  filter() {
+    console.log(this.filterValue);
+  }
 }
