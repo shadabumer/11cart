@@ -48,6 +48,7 @@
     <ion-list-header color="primary">
       <h2 class="ion-text-center">Browse Products</h2>
     </ion-list-header>
+    <!-- filter starts here -->
     <div class="filter">
       <ion-item>
         <ion-label position="floating" color="primary">Filter By:</ion-label>
@@ -57,7 +58,7 @@
         <ion-select-option value="priceHigh">Price High</ion-select-option>
         <ion-select-option value="priceLow">Price Low</ion-select-option>
         <ion-select-option value="category">Category</ion-select-option>
-          <ion-select-option value="clear">clear filters</ion-select-option>
+          <ion-select-option value="clearfilters">Clear Filters</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -69,34 +70,39 @@
           <ion-select-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</ion-select-option>
         </ion-select>
       </ion-item>
-
     </div>
-    <ion-card (click)="onItemSelected(item)" *ngFor="let item of items">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4" class="item-image">
-            <ion-img [src]="item.imageUrl" [alt]="item.name"></ion-img>
-          </ion-col>
-          <ion-col size="8" class="ion-padding-start item-list">
-            <h4>{{ item.name }}</h4>
-            <p>
-              {{ item.description }}
-            </p>
-            <strong>{{ item?.units || '500gm'}}</strong>
-            <h5>{{ item.price | currency:'INR' }}
-              <ion-button class="ion-float-right" [disabled]="item.amount < 1" 
-              (click)="addToCart($event, item)">
-                Add &nbsp;
-                <ion-icon name="basket"></ion-icon>
-              </ion-button>
-            </h5>
-            <span *ngIf="item.amount < 1">
-              <ion-text color="danger">Out of stock</ion-text>
-            </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
+    <!-- filter ends here -->
+    <ion-virtual-scroll [items]="items" approxItemHeight="320px">
+      <ion-list *virtualItem="let item; let itemBounds = bounds;">
+        
+        <ion-card (click)="onItemSelected(item)">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4" class="item-image">
+                <ion-img [src]="item.imageUrl" [alt]="item.name"></ion-img>
+              </ion-col>
+              <ion-col size="8" class="ion-padding-start item-list">
+                <h4>{{ item.name }}</h4>
+                <p>
+                  {{ item.description }}
+                </p>
+                <strong>{{ item?.units || '500gm'}}</strong>
+                <h5>{{ item.price | currency:'INR' }}
+                  <ion-button class="ion-float-right" [disabled]="item.amount < 1" 
+                  (click)="addToCart($event, item)">
+                    Add &nbsp;
+                    <ion-icon name="basket"></ion-icon>
+                  </ion-button>
+                </h5>
+                <span *ngIf="item.amount < 1">
+                  <ion-text color="danger">Out of stock</ion-text>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-list>
+    </ion-virtual-scroll>
   </ion-list>
   <!-- product list ends here -->
 
