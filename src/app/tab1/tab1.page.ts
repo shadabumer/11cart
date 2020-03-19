@@ -22,7 +22,10 @@ export class Tab1Page implements OnInit {
 
   categories: Category[];
   isCategoriesLoaded: boolean = false;
+  isFilterByCategory: boolean = false;
+
   items: Item[];
+  loadedItems: Item[];
   isItemsLoaded: boolean = false;
   filterValue: any;
   
@@ -34,13 +37,14 @@ export class Tab1Page implements OnInit {
   ngOnInit() {
     this.categoryService.getCategories()
       .subscribe((categoryList: any) => {
-        this.categories = categoryList.slice(0, 6);
+        this.categories = categoryList;
         this.isCategoriesLoaded = true;
       })
 
     this.itemService.getItems()
     .subscribe((itemsList: any) => {
       this.items = itemsList;
+      this.loadedItems = [...itemsList];
       this.isItemsLoaded = true;
     })
   }
@@ -65,5 +69,31 @@ export class Tab1Page implements OnInit {
 
   filter() {
     console.log(this.filterValue);
+    switch(this.filterValue) {
+      case 'priceHigh': 
+        this.items = this.items.sort((a, b) => b.price - a.price);
+        break;
+      case 'priceLow': 
+        this.items = this.items.sort((a, b) => a.price - b.price);
+        break;
+      case 'category': this.isFilterByCategory = true; break;
+      default: this.clearFilters(); break;
+    }
+  }
+
+  filterByCategory(e) {
+    const category = e.target.value;
+    this.items = [...this.loadedItems];
+
+    console.log('selected category:', category)
+    this.items = this.items.filter(item => item.category === category);
+  }
+
+  clearFilters() {
+    this.filterValue = "";
+    this.isFilterByCategory = false;
+
+    console.log('loaded items:', this.loadedItems);
+    this.items = [...this.loadedItems];
   }
 }

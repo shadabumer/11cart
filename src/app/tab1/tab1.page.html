@@ -32,8 +32,10 @@
       <div class="row">
         <div class="column" *ngFor="let category of categories; let i = index"
         (click)="onSelectCategory(category.id)">
+        <ng-container *ngIf="i < 6">
           <ion-img [src]="category.imageUrl" [alt]="category.name"></ion-img>
           <ion-label class="ion-text-center">{{ category.name }}</ion-label>
+        </ng-container>
         </div>
       </div>
       <ion-button expand="block" shape="round" fill="outline" (click)="viewMore($event)">View More
@@ -49,12 +51,22 @@
     <div class="filter">
       <ion-item>
         <ion-label position="floating" color="primary">Filter By:</ion-label>
-        <ion-select multiple="true" [value]="['category', 'priceHigh']" [(ngModel)]="filterValue" interface="action-sheet"
+        <ion-select [value]="['category', 'priceHigh']" [(ngModel)]="filterValue" interface="action-sheet"
           (ionChange)="filter()"
         >
-          <ion-select-option value="category">Category</ion-select-option>
-          <ion-select-option value="priceHigh">Price High</ion-select-option>
-          <ion-select-option value="priceLow">Price Low</ion-select-option>
+        <ion-select-option value="priceHigh">Price High</ion-select-option>
+        <ion-select-option value="priceLow">Price Low</ion-select-option>
+        <ion-select-option value="category">Category</ion-select-option>
+          <ion-select-option value="clear">clear filters</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="isFilterByCategory">
+        <ion-label position="floating" color="primary">Select Category:</ion-label>
+        <ion-select [(ngModel)]="category" interface="action-sheet"
+          (ionChange)="filterByCategory($event)"
+        >
+          <ion-select-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</ion-select-option>
         </ion-select>
       </ion-item>
 
