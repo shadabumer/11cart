@@ -43,6 +43,33 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- offers starts here -->
+  <div class="offers-slides">
+    <ion-card-header color="primary">
+      <ion-card-title class="ion-text-center">
+        <h3>Offers & Discounts</h3>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <img src="/assets/images/offers/1.webp" alt="" />
+      </ion-slide>
+      <ion-slide>
+        <img src="/assets/images/offers/2.webp" alt="" />
+      </ion-slide>
+      <ion-slide>
+        <img src="/assets/images/offers/3.webp" alt="" />
+      </ion-slide>
+      <ion-slide>
+        <img src="/assets/images/offers/4.webp" alt="" />
+      </ion-slide>
+      <ion-slide>
+        <img src="/assets/images/offers/5.jpg" alt="" />
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <!-- offers ends here -->
+
   <!-- product list starts here -->
   <ion-list>
     <ion-list-header color="primary">
@@ -64,8 +91,8 @@
 
       <ion-item *ngIf="isFilterByCategory">
         <ion-label position="floating" color="primary">Select Category:</ion-label>
-        <ion-select [(ngModel)]="category" interface="action-sheet"
-          (ionChange)="filterByCategory($event)"
+        <ion-select [(ngModel)]="categoryValue" interface="action-sheet"
+          (ionChange)="filterByCategory()"
         >
           <ion-select-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</ion-select-option>
         </ion-select>

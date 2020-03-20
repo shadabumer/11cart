@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 
 import { CategoryService } from '../shared/category.service';
 import { ManageItemsService } from '../shared/manage-items.service';
@@ -27,7 +26,8 @@ export class Tab1Page implements OnInit {
   items: Item[];
   loadedItems: Item[];
   isItemsLoaded: boolean = false;
-  filterValue: any;
+  filterValue: string;
+  categoryValue: string;
   
   constructor(public categoryService: CategoryService,
               public itemService: ManageItemsService,
@@ -69,6 +69,7 @@ export class Tab1Page implements OnInit {
 
   filter() {
     console.log(this.filterValue);
+    this.items = [...this.items];
     switch(this.filterValue) {
       case 'priceHigh': 
         this.items = this.items.sort((a, b) => b.price - a.price);
@@ -81,16 +82,16 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  filterByCategory(e) {
-    const category = e.target.value;
+  filterByCategory() {
     this.items = [...this.loadedItems];
 
-    console.log('selected category:', category)
-    this.items = this.items.filter(item => item.category === category);
+    console.log('selected category:', this.categoryValue)
+    this.items = this.items.filter(item => item.category === this.categoryValue);
   }
 
   clearFilters() {
     this.filterValue = "";
+    this.categoryValue = "";
     this.isFilterByCategory = false;
 
     console.log('loaded items:', this.loadedItems);

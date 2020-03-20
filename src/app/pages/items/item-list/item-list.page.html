@@ -11,6 +11,20 @@
 </ion-header>
 
 <ion-content>
+  <!-- filter starts here -->
+  <div class="filters">
+    <ion-item>
+      <ion-label position="floating" color="primary">Filter By:</ion-label>
+      <ion-select [value]="['priceLow', 'priceHigh']" [(ngModel)]="filterValue" interface="action-sheet"
+        (ionChange)="filter()"
+      >
+      <ion-select-option value="priceHigh">Price High</ion-select-option>
+      <ion-select-option value="priceLow">Price Low</ion-select-option>
+      <ion-select-option value="clearfilters">Clear Filters</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <!-- filter ends here -->
   <ion-virtual-scroll [items]="itemList" approxItemHeight="320px">
     <ion-list *virtualItem="let item; let itemBounds = bounds;">
     <ion-item class="ion-no-padding" color="light" (click)="onItemSelected(item)">
