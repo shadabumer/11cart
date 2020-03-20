@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/public/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [UnAuthGuard]
   },
   {
     path: 'tabs',
@@ -67,6 +68,12 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./pages/public/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
+  {
+    path: 'about-us',
+    loadChildren: () => import('./pages/about-us/about-us.module').then( m => m.AboutUsPageModule),
+    canActivate: [AuthGuard]
+  },
+
 
 
 
