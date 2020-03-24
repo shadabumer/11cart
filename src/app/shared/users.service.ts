@@ -9,6 +9,7 @@ import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 const TOKEN_KEY = 'auth-token';
+const USER_ID = 'user-id';
  
 @Injectable({
   providedIn: 'root'
@@ -50,13 +51,18 @@ export class UsersService {
     this.storage.set(TOKEN_KEY, userToken).then(() => {
       this.authenticationState.next(true);
     });
+    this.storage.set(USER_ID, user.user.uid)
+    .then( data => {
+      console.log('uid saved:', data);
+    })
     return user;
   }  
 
   logout() {
     this.afAuth.auth.signOut;
     console.log('logout user details:', this.userDetails().uid);
-    return this.storage.remove(TOKEN_KEY).then(() => {
+    return this.storage.clear().then(() => {
+      console.log('keys cleared')
       this.authenticationState.next(false);
     });
   }
@@ -65,13 +71,32 @@ export class UsersService {
     return this.afAuth.auth.currentUser;
   }
 
+  getUserId() {
+    // return this.userDetails()
+    if (this.userDetails()) {
+      return this.userDetails().uid
+    } else {
+      this.storage.get(USER_ID).then(async userId => {
+        console.log('user id:', userId);
+        return await userId;
+      })
+    }
+  }
+
   checkToken() {
     this.storage.get(TOKEN_KEY).then(res => {
       if (res) {
         console.log('check token res:', res);
-        console.log('users id:',this.afAuth.auth.currentUser.uid);
+        this.router.navigate(['tabs', 'tab1']);
+        // console.log('users id:',this.afAuth.auth.currentUser.uid);
         this.authenticationState.next(true);
       }
+    });
+    this.storage.keys().then(data => {
+      console.log('keys:', data);
+    })
+    .catch(data => {
+      console.log('no keys found:', data);
     })
   }
 

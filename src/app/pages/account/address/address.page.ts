@@ -20,7 +20,8 @@ export class AddressPage implements OnInit {
 
   constructor(private address: AddressService,
     private user: UsersService) {
-      this.userId = this.user.userDetails().uid;
+      // this.userId = this.user.userDetails().uid;
+      this.userId = this.user.getUserId();
       console.log('userId:', this.userId);
      }
 

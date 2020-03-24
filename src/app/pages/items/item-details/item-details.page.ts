@@ -24,7 +24,8 @@ export class ItemDetailsPage implements OnInit {
     private user: UsersService,
     private itemService: ManageItemsService,
     public toastController: ToastController) { 
-      const userId = this.user.userDetails().uid;
+      // const userId = this.user.userDetails().uid;
+      const userId = this.user.getUserId();
       this.user.getUser(userId).subscribe((userData: User) => {
         console.log('user data:', userData);
         this.currentUser = userData;

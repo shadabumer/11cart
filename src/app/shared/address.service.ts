@@ -11,7 +11,8 @@ export class AddressService {
   userId: string = "";
   constructor(private db: AngularFirestore,
     private user: UsersService) {
-      this.userId = this.user.userDetails().uid;
+      // this.userId = this.user.userDetails().uid;
+      this.userId = this.user.getUserId();
      }
 
     createAddress(address: Address) {

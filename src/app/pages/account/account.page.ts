@@ -16,7 +16,8 @@ export class AccountPage implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    let userId = this.user.userDetails().uid;
+    // let userId = this.user.userDetails().uid;
+    let userId = this.user.getUserId();
     this.currentUser$ = this.user.getUser(userId);
     this.userName = this.user.userDetails().displayName;
     console.log('display name:', this.userName);

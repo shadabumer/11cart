@@ -23,7 +23,9 @@ export class AppComponent {
     public authenticationService: UsersService,
     private router: Router,
     private deeplinks: Deeplinks
-  ) {
+  ) 
+  {
+    this.authenticationService.checkToken();
     this.initializeApp();
 
     this.deeplinks.route({

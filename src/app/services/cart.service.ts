@@ -23,12 +23,17 @@ export class CartService {
   private subscription: Subscription;
 
   constructor(private db: AngularFirestore, private users: UsersService) {
-    this.userId = this.users.userDetails().uid;
+    // this.userId = this.users.userDetails().uid;
+    this.getUserData();
       this.subscription = this.initCart().subscribe((cartList: any) => {
         this.cart = cartList;
         console.log('cartService cart:', this.cart);
       })
    }
+
+  async getUserData() {
+    this.userId = await this.users.getUserId();
+  }
 
   initCart() {
     return this.db.collection('cart').doc(this.userId).collection('cartItems').snapshotChanges()

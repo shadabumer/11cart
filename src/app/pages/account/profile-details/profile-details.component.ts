@@ -24,7 +24,8 @@ export class ProfileDetailsComponent implements OnInit, OnDestroy {
     private user: UsersService) { }
 
   ngOnInit() {
-    this.userId = this.user.userDetails().uid;
+    // this.userId = this.user.userDetails().uid;
+    this.userId = this.user.getUserId();
     this.currentUser$ = this.user.getUser(this.userId);
 
     this.subscription = this.user.getUser(this.userId).subscribe((data: User) => {
