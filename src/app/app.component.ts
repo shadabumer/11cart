@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UsersService } from './shared/users.service';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { ForgotPasswordPage } from './pages/public/forgot-password/forgot-password.page';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -22,8 +23,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     public authenticationService: UsersService,
     private router: Router,
-    private deeplinks: Deeplinks
+    private deeplinks: Deeplinks,
+    private http: HttpClient
   ) {
+    this.httpCallableFunctions();
     this.initializeApp();
 
     this.deeplinks.route({
@@ -34,6 +37,13 @@ export class AppComponent {
     }, nomatch => {
       this.router.navigate(['']);
       console.error('Got a deeplink that didn\'t match', nomatch);
+    })
+  }
+
+  httpCallableFunctions() {
+    this.http.get('https://us-central1-cart-a1a37.cloudfunctions.net/helloWorld')
+    .subscribe(data => {
+      console.log('data from cloud function:', data);
     })
   }
 
