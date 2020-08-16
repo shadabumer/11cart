@@ -69,11 +69,14 @@ export class PasswordResetPage implements OnInit {
     .then(success => {
       console.log('password updated successfully:', success);
       this.displayToast('Password changed successfully', 'Authentication-success');
-      this.passwordForm.reset();
     })
     .catch(error => {
       console.log('password not updated:', error);
       this.displayToast('Password update failed', 'Authentication-error');
+    })
+    .finally(() => {
+      this.isSubmitted = false;
+      this.passwordForm.reset();
     })
   }
 
